@@ -49,6 +49,7 @@ typedef struct window_s {
     sfBool music_bool;
     sfMusic *music;
     char *background;
+    char *colision;
     char *sound_select;
     char *font;
     char *sett_logo;

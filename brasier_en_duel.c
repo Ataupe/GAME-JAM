@@ -36,10 +36,10 @@ static void init_main(window_t *main)
 
 static void init_game(list_t *list)
 {
-    list->txtrs[0].rectangle = (sfIntRect){0, 0, 84, 84};
+    list->txtrs[0].rectangle = (sfIntRect){0, 0, 50, 50};
     list->txtrs[0].position = (sfVector2f){800, 600};
     list->txtrs[0].clock = sfClock_create();
-    list->txtrs[1].rectangle = (sfIntRect){0, 0, 84, 84};
+    list->txtrs[1].rectangle = (sfIntRect){0, 0, 50, 50};
     list->txtrs[1].position = (sfVector2f){960, 540};
     list->txtrs[1].clock = sfClock_create();
 }
@@ -60,9 +60,8 @@ int main(int argc, char **argv)
         sfRenderWindow_clear(main.window, sfTransparent);
         if (main.menu == sfTrue)
             main_menu(&main, &button, &texture);
-        if (main.menu == sfFalse) {
+        if (main.menu == sfFalse)
             start_game(&main, &button, &texture, &list);
-        }
         sfRenderWindow_display(main.window);
     }
     sfRenderWindow_destroy(main.window);

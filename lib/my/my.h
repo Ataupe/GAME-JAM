@@ -24,7 +24,8 @@ void display_text(char *text, window_t *main, button_t *button);
 void display_rectangle(window_t *main, button_t *button, sfColor color);
 void music(window_t *main);
 sfBool left_click_released(sfEvent event);
-void start_game(window_t *main, button_t *button, texture_t *texture, list_t *list);
+void start_game(window_t *main, button_t *button, texture_t *texture,
+    list_t *list);
 void player_conditions_1(float t, window_t *main, list_t *list);
 void player_conditions_2(float t, window_t *main, list_t *list);
 void player_animation_up1(float t, window_t *main, list_t *list);
