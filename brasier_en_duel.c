@@ -31,6 +31,9 @@ static void init_main(window_t *main)
     main->sound_menu = "extra/sound/menu.ogg";
     main->font = "extra/font/font.ttf";
     main->sett_logo = "extra/menu/setting_logo.png";
+    main->map_chose = 10;
+    main->time_chose = 10;
+    main->selection = sfFalse;
 }
 
 int main(int argc, char **argv)

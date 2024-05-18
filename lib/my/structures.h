@@ -50,11 +50,13 @@ typedef struct window_s {
     sfBool menu;
     sfBool music_bool;
     sfMusic *music;
-    sfBool setting_bool;
     char *bck_menu;
     char *sound_menu;
     char *font;
     char *sett_logo;
+    int map_chose;
+    int time_chose;
+    sfBool selection;
 } window_t;
 
 #endif /* STRUCTURES_H_ */

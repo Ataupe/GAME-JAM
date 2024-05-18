@@ -7,6 +7,88 @@
 
 #include "my.h"
 
+sfBool left_click_released(sfEvent event)
+{
+    if (event.type == sfEvtMouseButtonReleased &&
+    event.mouseButton.button == sfMouseLeft)
+        return sfTrue;
+    else
+        return sfFalse;
+}
+
+static void selection(int index, window_t *main)
+{
+    if (index >= 0 && index <= 2)
+        main->map_chose = index;
+    if (index >= 3 && index <= 5)
+        main->time_chose = index;
+    if (main->map_chose != 10 && main->time_chose != 10)
+        main->selection = sfTrue;
+}
+
+static void on_selection(window_t *main, button_t *button, int index,
+    sfVector2f pos)
+{
+    char *text[6] = {"10 X 10", "15 X 15", "20 X 20", "30 sec", "60 sec",
+    "90 sec"};
+    sfColor color = sfColor_fromRGB(220, 75, 0);
+
+    button->font = sfFont_createFromFile(main->font);
+    button->text = sfText_create();
+    sfText_setFont(button->text, button->font);
+    sfText_setString(button->text, text[index]);
+    sfText_setCharacterSize(button->text, 18);
+    sfText_setPosition(button->text, pos);
+    if (sfMouse_isButtonPressed(sfMouseLeft)){
+        color = sfColor_fromRGB(180, 180, 180);
+        selection(index, main);
+    }
+    sfText_setFillColor(button->text, color);
+    sfRenderWindow_drawText(main->window, button->text, NULL);
+    sfText_destroy(button->text);
+    sfFont_destroy(button->font);
+}
+
+static void event_button2(window_t *main, button_t *button)
+{
+    if (main->map_chose == 0)
+        on_selection(main, button, 0, (sfVector2f){106, 455});
+    if (main->map_chose == 1)
+        on_selection(main, button, 1, (sfVector2f){251, 455});
+    if (main->map_chose == 2)
+        on_selection(main, button, 2, (sfVector2f){396, 455});
+    if (main->time_chose == 3)
+        on_selection(main, button, 3, (sfVector2f){110, 655});
+    if (main->time_chose == 4)
+        on_selection(main, button, 4, (sfVector2f){255, 655});
+    if (main->time_chose == 5)
+        on_selection(main, button, 5, (sfVector2f){400, 655});
+}
+
+static void event_button(window_t *main, button_t *button)
+{
+    sfVector2i mousePos = sfMouse_getPositionRenderWindow(main->window);
+
+    if (mousePos.x >= 100 && mousePos.x <= 200 && mousePos.y >= 440 &&
+    mousePos.y <= 490)
+        on_selection(main, button, 0, (sfVector2f){106, 455});
+    if (mousePos.x >= 245 && mousePos.x <= 345 && mousePos.y >= 440 &&
+    mousePos.y <= 490)
+        on_selection(main, button, 1, (sfVector2f){251, 455});
+    if (mousePos.x >= 390 && mousePos.x <= 490 && mousePos.y >= 440 &&
+    mousePos.y <= 490)
+        on_selection(main, button, 2, (sfVector2f){396, 455});
+    if (mousePos.x >= 100 && mousePos.x <= 200 && mousePos.y >= 640 &&
+    mousePos.y <= 690)
+        on_selection(main, button, 3, (sfVector2f){110, 655});
+    if (mousePos.x >= 245 && mousePos.x <= 345 && mousePos.y >= 640 &&
+    mousePos.y <= 690)
+        on_selection(main, button, 4, (sfVector2f){255, 655});
+    if (mousePos.x >= 390 && mousePos.x <= 490 && mousePos.y >= 640 &&
+    mousePos.y <= 690)
+        on_selection(main, button, 5, (sfVector2f){400, 655});
+}
+
 static void music(window_t *main)
 {
     main->music = sfMusic_createFromFile("extra/sound/menu.ogg");
@@ -73,14 +155,6 @@ static void background(window_t *main, texture_t *texture)
     sfRenderWindow_drawSprite(main->window, texture->sprite, NULL);
     sfSprite_destroy(texture->sprite);
     sfTexture_destroy(texture->texture);
-    texture->texture = sfTexture_createFromFile(main->sett_logo, NULL);
-    texture->sprite = sfSprite_create();
-    sfSprite_setTexture(texture->sprite, texture->texture, sfFalse);
-    sfSprite_setPosition(texture->sprite,
-    (sfVector2f){1850 * main->size, 950 * main->size});
-    sfRenderWindow_drawSprite(main->window, texture->sprite, NULL);
-    sfSprite_destroy(texture->sprite);
-    sfTexture_destroy(texture->texture);
 }
 
 void main_menu(window_t *main, button_t *button, texture_t *texture)
@@ -90,11 +164,12 @@ void main_menu(window_t *main, button_t *button, texture_t *texture)
     background(main, texture);
     button_menu(main, button);
     texts_menu(main, button);
+    event_button(main, button);
+    event_button2(main, button);
+    if (main->selection == sfTrue)
+        exit(0);
 }
 
-//if (main->setting_bool == sfTrue) {
-//    return;
-//}
 //event_button(main, button, button);
 //event(main, button);
 //destroy()
