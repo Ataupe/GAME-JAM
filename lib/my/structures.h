@@ -48,8 +48,8 @@ typedef struct window_s {
     sfBool menu;
     sfBool music_bool;
     sfMusic *music;
-    char *bck_menu;
-    char *sound_menu;
+    char *background;
+    char *sound_select;
     char *font;
     char *sett_logo;
     int map_chose;

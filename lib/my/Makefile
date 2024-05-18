@@ -7,6 +7,8 @@
 
 SRC	= 	main_menu.c					\
 		fonction_disp.c				\
+		outils.c					\
+		game.c						\
 
 OBJ	=	$(SRC:.c=.o)
 

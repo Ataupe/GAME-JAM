@@ -25,8 +25,8 @@ static void init_main(window_t *main)
     sfClose | sfResize, NULL);
     main->menu = sfTrue;
     main->music_bool = sfFalse;
-    main->bck_menu = "extra/menu/menu.jpg";
-    main->sound_menu = "extra/sound/menu.ogg";
+    main->background = "extra/menu/menu.jpg";
+    main->sound_select = "extra/sound/menu.ogg";
     main->font = "extra/font/font.ttf";
     main->sett_logo = "extra/menu/setting_logo.png";
     main->map_chose = 10;
@@ -49,7 +49,7 @@ int main(int argc, char **argv)
         if (main.menu == sfTrue)
             main_menu(&main, &button, &texture);
         if (main.menu == sfFalse) {
-            exit(0);
+            start_game(&main, &button, &texture);
         }
         sfRenderWindow_display(main.window);
     }

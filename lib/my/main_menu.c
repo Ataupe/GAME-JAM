@@ -7,15 +7,6 @@
 
 #include "my.h"
 
-sfBool left_click_released(sfEvent event)
-{
-    if (event.type == sfEvtMouseButtonReleased &&
-    event.mouseButton.button == sfMouseLeft)
-        return sfTrue;
-    else
-        return sfFalse;
-}
-
 static void selection(int index, window_t *main)
 {
     if (index >= 0 && index <= 2)
@@ -24,6 +15,27 @@ static void selection(int index, window_t *main)
         main->time_chose = index;
     if (main->map_chose != 10 && main->time_chose != 10)
         main->selection = sfTrue;
+}
+
+static void event_start_game(window_t *main, button_t *button)
+{
+    sfVector2i mousePos = sfMouse_getPositionRenderWindow(main->window);
+
+    button->color = sfWhite;
+    if (main->selection == sfTrue) {
+        button->position = (sfVector2f){1300, 710};
+        button->size = 30;
+        if (mousePos.x >= 1300 && mousePos.x <= 1740 && mousePos.y >= 700 &&
+            mousePos.y <= 740)
+            button->color = sfColor_fromRGB(220, 75, 0);
+        display_text("Commencer la Partie", main, button);
+        if (left_click_released(main->event) && mousePos.x >= 1300 &&
+        mousePos.x <= 1740 && mousePos.y >= 700 && mousePos.y <= 740) {
+            main->menu = sfFalse;
+            sfMusic_destroy(main->music);
+            main->music_bool = sfFalse;
+        }
+    }
 }
 
 static void on_selection(window_t *main, button_t *button, int index,
@@ -62,7 +74,6 @@ static void event_button2(window_t *main, button_t *button)
         on_selection(main, button, 4, (sfVector2f){255, 655});
     if (main->time_chose == 5)
         on_selection(main, button, 5, (sfVector2f){400, 655});
-    button->color = sfWhite;
 }
 
 static void event_button(window_t *main, button_t *button)
@@ -87,15 +98,6 @@ static void event_button(window_t *main, button_t *button)
     if (mousePos.x >= 390 && mousePos.x <= 490 && mousePos.y >= 640 &&
     mousePos.y <= 690)
         on_selection(main, button, 5, (sfVector2f){400, 655});
-}
-
-static void music(window_t *main)
-{
-    main->music = sfMusic_createFromFile("extra/sound/menu.ogg");
-    sfMusic_setLoop(main->music, sfTrue);
-    sfMusic_setVolume(main->music, 10);
-    sfMusic_play(main->music);
-    main->music_bool = sfTrue;
 }
 
 static void button_menu(window_t *main, button_t *button)
@@ -148,34 +150,22 @@ static void texts_menu(window_t *main, button_t *button)
 
 static void background(window_t *main, texture_t *texture)
 {
-    texture->texture = sfTexture_createFromFile(main->bck_menu, NULL);
+    texture->texture = sfTexture_createFromFile(main->background, NULL);
     texture->sprite = sfSprite_create();
     sfSprite_setTexture(texture->sprite, texture->texture, sfFalse);
     sfRenderWindow_drawSprite(main->window, texture->sprite, NULL);
     sfSprite_destroy(texture->sprite);
     sfTexture_destroy(texture->texture);
+    if (main->music_bool == sfFalse)
+        music(main);
 }
 
 void main_menu(window_t *main, button_t *button, texture_t *texture)
 {
-    sfVector2i mousePos = sfMouse_getPositionRenderWindow(main->window);
-
-    if (main->music_bool == sfFalse)
-        music(main);
     background(main, texture);
     button_menu(main, button);
     texts_menu(main, button);
     event_button(main, button);
     event_button2(main, button);
-    if (main->selection == sfTrue) {
-        button->position = (sfVector2f){1300, 710};
-        button->size = 30;
-        if (mousePos.x >= 1300 && mousePos.x <= 1740 && mousePos.y >= 700 &&
-            mousePos.y <= 740)
-            button->color = sfColor_fromRGB(220, 75, 0);
-        display_text("Commencer la Partie", main, button);
-        if (left_click_released(main->event) && mousePos.x >= 1300 &&
-        mousePos.x <= 1740 && mousePos.y >= 700 && mousePos.y <= 740)
-            main->menu = sfFalse;
-    }
+    event_start_game(main, button);
 }

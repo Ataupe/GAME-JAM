@@ -22,5 +22,8 @@
 void main_menu(window_t *main, button_t *button, texture_t *texture);
 void display_text(char *text, window_t *main, button_t *button);
 void display_rectangle(window_t *main, button_t *button, sfColor color);
+void music(window_t *main);
+sfBool left_click_released(sfEvent event);
+void start_game(window_t *main, button_t *button, texture_t *texture);
 
 #endif /* !MY_H_ */
