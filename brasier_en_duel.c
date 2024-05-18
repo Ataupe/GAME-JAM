@@ -34,22 +34,34 @@ static void init_main(window_t *main)
     main->selection = sfFalse;
 }
 
+static void init_game(list_t *list)
+{
+    list->txtrs[0].rectangle = (sfIntRect){0, 0, 84, 84};
+    list->txtrs[0].position = (sfVector2f){800, 600};
+    list->txtrs[0].clock = sfClock_create();
+    list->txtrs[1].rectangle = (sfIntRect){0, 0, 84, 84};
+    list->txtrs[1].position = (sfVector2f){960, 540};
+    list->txtrs[1].clock = sfClock_create();
+}
+
 int main(int argc, char **argv)
 {
     window_t main;
+    list_t list;
     button_t button;
     texture_t texture;
 
     if (argc != 1)
         return 84;
     init_main(&main);
+    init_game(&list);
     while (sfRenderWindow_isOpen(main.window)) {
         event_close(&main);
         sfRenderWindow_clear(main.window, sfTransparent);
         if (main.menu == sfTrue)
             main_menu(&main, &button, &texture);
         if (main.menu == sfFalse) {
-            start_game(&main, &button, &texture);
+            start_game(&main, &button, &texture, &list);
         }
         sfRenderWindow_display(main.window);
     }

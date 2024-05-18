@@ -9,6 +9,10 @@ SRC	= 	main_menu.c					\
 		fonction_disp.c				\
 		outils.c					\
 		game.c						\
+		player_movment1.c			\
+		player_movment2.c			\
+		player_animation1.c			\
+		player_animation2.c			\
 
 OBJ	=	$(SRC:.c=.o)
 
