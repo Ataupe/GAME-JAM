@@ -40,7 +40,6 @@ static void on_selection(window_t *main, button_t *button, int index,
     sfText_setCharacterSize(button->text, 18);
     sfText_setPosition(button->text, pos);
     if (sfMouse_isButtonPressed(sfMouseLeft)){
-        color = sfColor_fromRGB(180, 180, 180);
         selection(index, main);
     }
     sfText_setFillColor(button->text, color);
@@ -63,6 +62,7 @@ static void event_button2(window_t *main, button_t *button)
         on_selection(main, button, 4, (sfVector2f){255, 655});
     if (main->time_chose == 5)
         on_selection(main, button, 5, (sfVector2f){400, 655});
+    button->color = sfWhite;
 }
 
 static void event_button(window_t *main, button_t *button)
@@ -150,7 +150,6 @@ static void background(window_t *main, texture_t *texture)
 {
     texture->texture = sfTexture_createFromFile(main->bck_menu, NULL);
     texture->sprite = sfSprite_create();
-    sfSprite_scale(texture->sprite, main->scale);
     sfSprite_setTexture(texture->sprite, texture->texture, sfFalse);
     sfRenderWindow_drawSprite(main->window, texture->sprite, NULL);
     sfSprite_destroy(texture->sprite);
@@ -159,6 +158,8 @@ static void background(window_t *main, texture_t *texture)
 
 void main_menu(window_t *main, button_t *button, texture_t *texture)
 {
+    sfVector2i mousePos = sfMouse_getPositionRenderWindow(main->window);
+
     if (main->music_bool == sfFalse)
         music(main);
     background(main, texture);
@@ -166,10 +167,15 @@ void main_menu(window_t *main, button_t *button, texture_t *texture)
     texts_menu(main, button);
     event_button(main, button);
     event_button2(main, button);
-    if (main->selection == sfTrue)
-        exit(0);
+    if (main->selection == sfTrue) {
+        button->position = (sfVector2f){1300, 710};
+        button->size = 30;
+        if (mousePos.x >= 1300 && mousePos.x <= 1740 && mousePos.y >= 700 &&
+            mousePos.y <= 740)
+            button->color = sfColor_fromRGB(220, 75, 0);
+        display_text("Commencer la Partie", main, button);
+        if (left_click_released(main->event) && mousePos.x >= 1300 &&
+        mousePos.x <= 1740 && mousePos.y >= 700 && mousePos.y <= 740)
+            main->menu = sfFalse;
+    }
 }
-
-//event_button(main, button, button);
-//event(main, button);
-//destroy()

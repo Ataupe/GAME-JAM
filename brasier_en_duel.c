@@ -23,8 +23,6 @@ static void init_main(window_t *main)
     main->mode.bitsPerPixel = 32;
     main->window = sfRenderWindow_create(main->mode, "Brasier En Duel",
     sfClose | sfResize, NULL);
-    main->scale = (sfVector2f){1, 1};
-    main->size = 1;
     main->menu = sfTrue;
     main->music_bool = sfFalse;
     main->bck_menu = "extra/menu/menu.jpg";

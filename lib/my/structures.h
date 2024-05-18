@@ -44,8 +44,6 @@ typedef struct list_s {
 typedef struct window_s {
     sfRenderWindow* window;
     sfVideoMode mode;
-    sfVector2f scale;
-    int size;
     sfEvent event;
     sfBool menu;
     sfBool music_bool;
