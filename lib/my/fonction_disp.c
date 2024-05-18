@@ -10,7 +10,7 @@
 void display_text(char *text, window_t *main, button_t *button)
 {
     button->text = sfText_create();
-    button->font = sfFont_createFromFile("extra/font/Pareidolia.ttf");
+    button->font = sfFont_createFromFile(main->font);
     sfText_setFont(button->text, button->font);
     sfText_setCharacterSize(button->text, button->size);
     sfText_setFillColor(button->text, button->color);
@@ -24,14 +24,14 @@ void display_text(char *text, window_t *main, button_t *button)
 void display_rectangle(window_t *main, button_t *button, sfColor color)
 {
     button->color = color;
-    button->button_menu = sfRectangleShape_create();
-    sfRectangleShape_setSize(button->button_menu,
+    button->rectangle = sfRectangleShape_create();
+    sfRectangleShape_setSize(button->rectangle,
     button->size_rec);
-    sfRectangleShape_setFillColor(button->button_menu,
+    sfRectangleShape_setFillColor(button->rectangle,
     button->color);
-    sfRectangleShape_setPosition(button->button_menu,
+    sfRectangleShape_setPosition(button->rectangle,
     button->position);
     sfRenderWindow_drawRectangleShape(main->window,
-    button->button_menu, NULL);
-    sfRectangleShape_destroy(button->button_menu);
+    button->rectangle, NULL);
+    sfRectangleShape_destroy(button->rectangle);
 }

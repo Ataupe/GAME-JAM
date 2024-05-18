@@ -31,7 +31,7 @@ typedef struct button_s {
     int size;
     sfText *text;
     sfFont* font;
-    sfRectangleShape *button_menu;
+    sfRectangleShape *rectangle;
     sfColor color;
     sfVector2f position;
     sfVector2f size_rec;
@@ -45,11 +45,16 @@ typedef struct window_s {
     sfRenderWindow* window;
     sfVideoMode mode;
     sfVector2f scale;
+    int size;
     sfEvent event;
     sfBool menu;
     sfBool music_bool;
     sfMusic *music;
     sfBool setting_bool;
+    char *bck_menu;
+    char *sound_menu;
+    char *font;
+    char *sett_logo;
 } window_t;
 
 #endif /* STRUCTURES_H_ */
