@@ -20,8 +20,8 @@ static void switch_colision(window_t *main)
 static int is_pixel_black(window_t *main, list_t *list, int axis, int dir)
 {
     sfImage *colisions = sfImage_createFromFile(main->colision);
-    float x = (list->txtrs[1].position.x + 32);
-    float y = (list->txtrs[1].position.y + 54);
+    float x = (list->txtrs[1].position.x + 25);
+    float y = (list->txtrs[1].position.y + 45);
     sfColor pixel_color;
 
     if (axis == 0)

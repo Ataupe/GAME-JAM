@@ -57,7 +57,7 @@ void init_game(list_t *list)
     list->txtrs[6].countdown = 91;
 }
 
-int main(int argc, char **argv)
+int main(void)
 {
     window_t main;
     list_t list;
