@@ -7,10 +7,6 @@
 
 #include "my.h"
 
-void end_of_the_game_menu(window_t *main, button_t *button, texture_t *texture)
-{
-}
-
 static void destroy_counter(list_t *list)
 {
     sfClock_destroy(list->txtrs[4].clock);
