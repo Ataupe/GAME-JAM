@@ -140,7 +140,6 @@ void game2(window_t *main, button_t *button, texture_t *texture,
     sfRenderWindow_drawSprite(main->window, list->txtrs[1].sprite, NULL);
     sfRenderWindow_drawSprite(main->window, list->txtrs[2].sprite, NULL);
     sfRenderWindow_drawSprite(main->window, list->txtrs[3].sprite, NULL);
-    
     event_button4(main, list, button);
     if (check_collision(list->txtrs[0].sprite, list->txtrs[1].sprite) ||
     list->txtrs[i].countdown == 0) {
