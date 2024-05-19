@@ -155,14 +155,6 @@ static void make_players(list_t *list)
     sfSprite_setTextureRect(list->txtrs[1].sprite, list->txtrs[1].rectangle);
 }
 
-static void music_game(window_t *main)
-{
-    main->music = sfMusic_createFromFile(main->sound_select);
-    sfMusic_setVolume(main->music, 10);
-    sfMusic_play(main->music);
-    main->music_bool = sfTrue;
-}
-
 static void background(window_t *main, texture_t *texture)
 {
     texture->texture = sfTexture_createFromFile(main->background, NULL);
@@ -171,8 +163,12 @@ static void background(window_t *main, texture_t *texture)
     sfRenderWindow_drawSprite(main->window, texture->sprite, NULL);
     sfSprite_destroy(texture->sprite);
     sfTexture_destroy(texture->texture);
-    if (main->music_bool == sfFalse)
-        music_game(main);
+    if (main->music_bool == sfFalse) {
+        main->music = sfMusic_createFromFile(main->sound_select);
+        sfMusic_setVolume(main->music, 10);
+        sfMusic_play(main->music);
+        main->music_bool = sfTrue;
+    }
 }
 
 void start_game(window_t *main, button_t *button, texture_t *texture,

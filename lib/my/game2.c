@@ -12,7 +12,8 @@ sfBool check_collision(sfSprite *flame, sfSprite *water)
     sfVector2f flamme = sfSprite_getPosition(flame);
     sfVector2f eau = sfSprite_getPosition(water);
 
-    if (eau.x >= flamme.x - 32 && eau.x <= flamme.x + 32 && eau.y >= flamme.y - 32 && eau.y <= flamme.y +32)
+    if (eau.x >= flamme.x - 32 && eau.x <= flamme.x + 32 &&
+    eau.y >= flamme.y - 32 && eau.y <= flamme.y +32)
         return sfTrue;
     return sfFalse;
 }
@@ -24,44 +25,47 @@ static void destroy_counter(list_t *list)
     sfClock_destroy(list->txtrs[6].clock);
 }
 
-static void end_of_the_game_menu3(window_t *main, button_t *button, texture_t *texture,
-    list_t *list)
+static void end_of_the_game_menu3(window_t *main, button_t *button,
+    texture_t *texture, list_t *list)
 {
     sfVector2i mousePos = sfMouse_getPositionRenderWindow(main->window);
 
-    if (left_click_released(main->event) && mousePos.x >= 920 && mousePos.x <= 1000 && mousePos.y >= 515 && mousePos.y <= 535) {
+    if (left_click_released(main->event) && mousePos.x >= 920 &&
+    mousePos.x <= 1000 && mousePos.y >= 515 && mousePos.y <= 535) {
         main->music_bool = sfFalse;
         main->end_of_game = sfFalse;
         destroy_counter(list);
         init_game(list);
     }
-    if (left_click_released(main->event) && mousePos.x >= 870 && mousePos.x <= 1050 && mousePos.y >= 565 && mousePos.y <= 585) {
+    if (left_click_released(main->event) && mousePos.x >= 870 &&
+    mousePos.x <= 1050 && mousePos.y >= 565 && mousePos.y <= 585) {
         destroy_counter(list);
         init_main(main);
         init_game(list);
     }
 }
 
-static void end_of_the_game_menu2(window_t *main, button_t *button, texture_t *texture,
-    list_t *list)
+static void end_of_the_game_menu2(window_t *main, button_t *button,
+    texture_t *texture, list_t *list)
 {
     sfVector2i mousePos = sfMouse_getPositionRenderWindow(main->window);
 
-    button->size = 15;
     button->position = (sfVector2f){920, 525};
     button->color = sfBlack;
     display_text("REJOUER", main, button);
-    if (mousePos.x >= 920 && mousePos.x <= 1000 && mousePos.y >= 515 && mousePos.y <= 535) {
+    if (mousePos.x >= 920 && mousePos.x <= 1000 && mousePos.y >= 515 &&
+    mousePos.y <= 535) {
         button->color = sfRed;
         display_text("REJOUER", main, button);
     }
     button->color = sfBlack;
     button->position.y += 50;
     button->position.x -= 50;
-    display_text("MENU PRINCIPALE", main, button);
-    if (mousePos.x >= 870 && mousePos.x <= 1050 && mousePos.y >= 565 && mousePos.y <= 585) {
+    display_text("MENU PRINCIPAL", main, button);
+    if (mousePos.x >= 870 && mousePos.x <= 1050 && mousePos.y >= 565 &&
+    mousePos.y <= 585) {
         button->color = sfRed;
-        display_text("MENU PRINCIPALE", main, button);
+        display_text("MENU PRINCIPAL", main, button);
     }
     end_of_the_game_menu3(main, button, texture, list);
 }
@@ -85,8 +89,8 @@ void end_of_the_game_menu(window_t *main, button_t *button, texture_t *texture,
         button->size = 14;
         display_text("LA FLAMME OLYPIQUE BRULE TOUJOURS !", main, button);
     }
+    button->size = 15;
     end_of_the_game_menu2(main, button, texture, list);
-
 }
 
 static void display_counter(window_t *main, button_t *button, list_t *list)
@@ -116,7 +120,7 @@ static void event_button4(window_t *main, list_t *list, button_t *button)
 {
     sfVector2i mousePos = sfMouse_getPositionRenderWindow(main->window);
 
-    if (main->exit_game_menu == sfTrue ) {
+    if (main->exit_game_menu == sfTrue) {
         if (left_click_released(main->event) && mousePos.x >= 900 &&
         mousePos.x <= 940 && mousePos.y >= 550 && mousePos.y <= 560) {
             sfMusic_destroy(main->music);

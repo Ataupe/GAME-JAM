@@ -106,12 +106,12 @@ static void info_du_jeu(window_t *main, button_t *button)
     button->color = sfColor_fromRGBA(255, 255, 255, 240);
     button->size = 18;
     display_text("Brasier en Duel est un jeu competitif\n"
-                 "   en 1 contre 1 ou l'objectif est de\n"
-                 "sauver la flamme olympique. Le joueur\n"
-                 "      1 (rouge) doit eviter le joueur\n"
-                 "  2 (bleu). Chaque joueur choisit son\n"
-                 "element et se lance dans une bataille\n"
-                 "    strategique en un lapse de temps.\n", main, button);
+        "   en 1 contre 1 ou l'objectif est de\n"
+        "sauver la flamme olympique. Le joueur\n"
+        "      1 (rouge) doit eviter le joueur\n"
+        "  2 (bleu). Chaque joueur choisit son\n"
+        "element et se lance dans une bataille\n"
+        "    strategique en un lapse de temps.\n", main, button);
 }
 
 static void button_menu(window_t *main, button_t *button)
