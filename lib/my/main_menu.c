@@ -100,6 +100,30 @@ static void event_button(window_t *main, button_t *button)
         on_selection(main, button, 5, (sfVector2f){400, 655});
 }
 
+static void info_du_jeu(window_t *main, button_t *button)
+{
+    button->position = (sfVector2f){1400, 100};
+    button->color = sfColor_fromRGBA(255, 255, 255, 240);
+    button->size = 18;
+    display_text("Brasier en Duel est un jeu competitif\n"
+        "   en 1 contre 1 ou l'objectif est de\n"
+        " dominer la carte en couvrant la plus\n"
+        " grande surface possible avec soit du\n"
+        "    feu, soit de l'eau. Chaque joueur\n"
+        " choisit son element et se lance dans\n"
+        "une bataille strategique pour etendre\n"
+        " sa couverture Le vainqueur est celui\n"
+        "    qui, a la fin du temps imparti, a\n"
+        "      reussi a remplir la plus grande\n"
+        " partie de la carte avec son element.\n"
+        "     La cle de la victoire repose sur\n"
+        "        l'anticipation des mouvements\n"
+        " adverses pour prendre le controle de\n"
+        "    la carte. Le gagnant allumera ou \n"
+        "eteindra la flamme olymplique suivant\n"
+        "             l'element qu'il a choisi\n", main, button);
+}
+
 static void button_menu(window_t *main, button_t *button)
 {
     char *duree[3] = {"30 sec", "60 sec", "90 sec"};
@@ -165,6 +189,7 @@ void main_menu(window_t *main, button_t *button, texture_t *texture)
     background(main, texture);
     button_menu(main, button);
     texts_menu(main, button);
+    info_du_jeu(main, button);
     event_button(main, button);
     event_button2(main, button);
     event_start_game(main, button);
