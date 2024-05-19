@@ -40,32 +40,32 @@ static void player_up(float t, window_t *main, list_t *list)
 {
     sfSprite_setPosition(list->txtrs[1].sprite, list->txtrs[1].position);
     player_animation_up2(t, main, list);
-    if (is_pixel_black(main, list, 1, -8) == 0)
-        list->txtrs[1].position.y -= 7;
+    if (is_pixel_black(main, list, 1, -16) == 0)
+        list->txtrs[1].position.y -= 15;
 }
 
 static void player_down(float t, window_t *main, list_t *list)
 {
     sfSprite_setPosition(list->txtrs[1].sprite, list->txtrs[1].position);
     player_animation_down2(t, main, list);
-    if (is_pixel_black(main, list, 1, 8) == 0)
-        list->txtrs[1].position.y += 7;
+    if (is_pixel_black(main, list, 1, 16) == 0)
+        list->txtrs[1].position.y += 15;
 }
 
 static void player_left(float t, window_t *main, list_t *list)
 {
     sfSprite_setPosition(list->txtrs[1].sprite, list->txtrs[1].position);
     player_animation_left2(t, main, list);
-    if (is_pixel_black(main, list, 0, -8) == 0)
-        list->txtrs[1].position.x -= 7;
+    if (is_pixel_black(main, list, 0, -16) == 0)
+        list->txtrs[1].position.x -= 15;
 }
 
 static void player_right(float t, window_t *main, list_t *list)
 {
     sfSprite_setPosition(list->txtrs[1].sprite, list->txtrs[1].position);
     player_animation_right2(t, main, list);
-    if (is_pixel_black(main, list, 0, 8) == 0)
-        list->txtrs[1].position.x += 7;
+    if (is_pixel_black(main, list, 0, 16) == 0)
+        list->txtrs[1].position.x += 15;
 }
 
 void player_conditions_2(float t, window_t *main, list_t *list)
