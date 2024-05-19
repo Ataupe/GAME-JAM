@@ -10,9 +10,9 @@
 static void switch_colision(window_t *main)
 {
     if (main->map_chose == 0)
-        main->colision = "extra/game/colision10.jpg";
+        main->colision = "extra/game/colision10.png";
     if (main->map_chose == 1)
-        main->colision = "extra/game/colision15.jpg";
+        main->colision = "extra/game/colision15.png";
     if (main->map_chose == 2)
         main->colision = "extra/game/colision20.jpg";
 }
