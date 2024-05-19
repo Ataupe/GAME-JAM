@@ -41,7 +41,7 @@ static void event_start_game(window_t *main, button_t *button)
 static void on_selection(window_t *main, button_t *button, int index,
     sfVector2f pos)
 {
-    char *text[6] = {"10 X 10", "15 X 15", "20 X 20", "30 sec", "60 sec",
+    char *text[6] = {"MAP 1", "MAP 2", "MAP 3", "30 sec", "60 sec",
     "90 sec"};
     sfColor color = sfColor_fromRGB(220, 75, 0);
 
@@ -63,11 +63,11 @@ static void on_selection(window_t *main, button_t *button, int index,
 static void event_button2(window_t *main, button_t *button)
 {
     if (main->map_chose == 0)
-        on_selection(main, button, 0, (sfVector2f){106, 455});
+        on_selection(main, button, 0, (sfVector2f){110, 455});
     if (main->map_chose == 1)
-        on_selection(main, button, 1, (sfVector2f){251, 455});
+        on_selection(main, button, 1, (sfVector2f){260, 455});
     if (main->map_chose == 2)
-        on_selection(main, button, 2, (sfVector2f){396, 455});
+        on_selection(main, button, 2, (sfVector2f){260, 455});
     if (main->time_chose == 3)
         on_selection(main, button, 3, (sfVector2f){110, 655});
     if (main->time_chose == 4)
@@ -82,13 +82,13 @@ static void event_button(window_t *main, button_t *button)
 
     if (mousePos.x >= 100 && mousePos.x <= 200 && mousePos.y >= 440 &&
     mousePos.y <= 490)
-        on_selection(main, button, 0, (sfVector2f){106, 455});
+        on_selection(main, button, 0, (sfVector2f){110, 455});
     if (mousePos.x >= 245 && mousePos.x <= 345 && mousePos.y >= 440 &&
     mousePos.y <= 490)
-        on_selection(main, button, 1, (sfVector2f){251, 455});
+        on_selection(main, button, 1, (sfVector2f){260, 455});
     if (mousePos.x >= 390 && mousePos.x <= 490 && mousePos.y >= 440 &&
     mousePos.y <= 490)
-        on_selection(main, button, 2, (sfVector2f){396, 455});
+        on_selection(main, button, 2, (sfVector2f){410, 455});
     if (mousePos.x >= 100 && mousePos.x <= 200 && mousePos.y >= 640 &&
     mousePos.y <= 690)
         on_selection(main, button, 3, (sfVector2f){110, 655});
@@ -106,22 +106,12 @@ static void info_du_jeu(window_t *main, button_t *button)
     button->color = sfColor_fromRGBA(255, 255, 255, 240);
     button->size = 18;
     display_text("Brasier en Duel est un jeu competitif\n"
-        "   en 1 contre 1 ou l'objectif est de\n"
-        " dominer la carte en couvrant la plus\n"
-        " grande surface possible avec soit du\n"
-        "    feu, soit de l'eau. Chaque joueur\n"
-        " choisit son element et se lance dans\n"
-        "une bataille strategique pour etendre\n"
-        " sa couverture Le vainqueur est celui\n"
-        "    qui, a la fin du temps imparti, a\n"
-        "      reussi a remplir la plus grande\n"
-        " partie de la carte avec son element.\n"
-        "     La cle de la victoire repose sur\n"
-        "        l'anticipation des mouvements\n"
-        " adverses pour prendre le controle de\n"
-        "    la carte. Le gagnant allumera ou \n"
-        "eteindra la flamme olymplique suivant\n"
-        "             l'element qu'il a choisi\n", main, button);
+                 "   en 1 contre 1 ou l'objectif est de\n"
+                 "sauver la flamme olympique. Le joueur\n"
+                 "      1 (rouge) doit eviter le joueur\n"
+                 "  2 (bleu). Chaque joueur choisit son\n"
+                 "element et se lance dans une bataille\n"
+                 "    strategique en un lapse de temps.\n", main, button);
 }
 
 static void button_menu(window_t *main, button_t *button)
@@ -151,7 +141,7 @@ static void button_menu(window_t *main, button_t *button)
 static void texts_menu(window_t *main, button_t *button)
 {
     char *texts[2] = {"Taille de la map", "Duree du jeu"};
-    char *taille[3] = {"10 X 10", "15 X 15", "20 X 20"};
+    char *taille[3] = {"MAP 1", "MAP 2", "MAP 3"};
 
     button->position = (sfVector2f){100, 100};
     button->color = sfColor_fromRGBA(255, 255, 255, 240);
@@ -164,11 +154,11 @@ static void texts_menu(window_t *main, button_t *button)
         button->position.y += 200;
     }
     button->color = sfBlack;
-    button->position = (sfVector2f){106, 455};
+    button->position = (sfVector2f){110, 455};
     button->size = 18;
     for (int i = 0; i != 3; i++) {
         display_text(taille[i], main, button);
-        button->position.x += 145;
+        button->position.x += 150;
     }
 }
 
