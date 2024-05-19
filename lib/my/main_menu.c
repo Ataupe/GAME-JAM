@@ -67,7 +67,7 @@ static void event_button2(window_t *main, button_t *button)
     if (main->map_chose == 1)
         on_selection(main, button, 1, (sfVector2f){260, 455});
     if (main->map_chose == 2)
-        on_selection(main, button, 2, (sfVector2f){260, 455});
+        on_selection(main, button, 2, (sfVector2f){410, 455});
     if (main->time_chose == 3)
         on_selection(main, button, 3, (sfVector2f){110, 655});
     if (main->time_chose == 4)
