@@ -23,12 +23,8 @@ static void switch_option(window_t *main)
         main->sound_select = "extra/sound/fast_music.ogg";
 }
 
-static void draw_destroy_sprite(window_t *main, list_t *list)
+static void destroy_sprite(window_t *main, list_t *list)
 {
-    sfRenderWindow_drawSprite(main->window, list->txtrs[0].sprite, NULL);
-    sfRenderWindow_drawSprite(main->window, list->txtrs[1].sprite, NULL);
-    sfRenderWindow_drawSprite(main->window, list->txtrs[2].sprite, NULL);
-    sfRenderWindow_drawSprite(main->window, list->txtrs[3].sprite, NULL);
     sfSprite_destroy(list->txtrs[0].sprite);
     sfTexture_destroy(list->txtrs[0].texture);
     sfSprite_destroy(list->txtrs[1].sprite);
@@ -159,6 +155,14 @@ static void make_players(list_t *list)
     sfSprite_setTextureRect(list->txtrs[1].sprite, list->txtrs[1].rectangle);
 }
 
+static void music_game(window_t *main)
+{
+    main->music = sfMusic_createFromFile(main->sound_select);
+    sfMusic_setVolume(main->music, 10);
+    sfMusic_play(main->music);
+    main->music_bool = sfTrue;
+}
+
 static void background(window_t *main, texture_t *texture)
 {
     texture->texture = sfTexture_createFromFile(main->background, NULL);
@@ -168,7 +172,7 @@ static void background(window_t *main, texture_t *texture)
     sfSprite_destroy(texture->sprite);
     sfTexture_destroy(texture->texture);
     if (main->music_bool == sfFalse)
-        music(main);
+        music_game(main);
 }
 
 void start_game(window_t *main, button_t *button, texture_t *texture,
@@ -177,18 +181,18 @@ void start_game(window_t *main, button_t *button, texture_t *texture,
     sfVector2i mousePos = sfMouse_getPositionRenderWindow(main->window);
 
     switch_option(main);
-    if (main->end_of_game == sfTrue) {
-        return;
-    }
     background(main, texture);
     make_players(list);
     make_button(list);
-    draw_destroy_sprite(main, list);
-    event_button(main, list, button);
-    event_button2(main, list, button);
-    game2(main, button, texture, list);
-    if (main->exit_game_menu == sfTrue || main->pause_menu == sfTrue) {
-        return;
+    if (main->end_of_game == sfFalse) {
+        game2(main, button, texture, list);
+        event_button(main, list, button);
+        event_button2(main, list, button);
+    } else
+        end_of_the_game_menu(main, button, texture, list);
+    if (main->exit_game_menu == sfFalse && main->pause_menu == sfFalse &&
+    main->end_of_game == sfFalse) {
+        movement_players(main, list);
     }
-    movement_players(main, list);
+    destroy_sprite(main, list);
 }

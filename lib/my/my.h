@@ -40,7 +40,7 @@ void player_animation_left2(float t, window_t *main, list_t *list);
 void player_animation_right2(float t, window_t *main, list_t *list);
 void game2(window_t *main, button_t *button, texture_t *texture,
     list_t *list);
-void end_of_the_game_menu(window_t *main, button_t *button,
-    texture_t *texture);
+void end_of_the_game_menu(window_t *main, button_t *button, texture_t *texture,
+    list_t *list);
 
 #endif /* !MY_H_ */
