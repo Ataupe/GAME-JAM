@@ -24,7 +24,9 @@ typedef struct texture_s {
     sfIntRect rectangle;
     sfClock* clock;
     sfClock* clock2;
+    sfTime elapsed;
     sfVector2f position;
+    int countdown;
 } texture_t;
 
 typedef struct button_s {
@@ -38,7 +40,7 @@ typedef struct button_s {
 } button_t;
 
 typedef struct list_s {
-    texture_t txtrs[2];
+    texture_t txtrs[7];
 } list_t;
 
 typedef struct window_s {
@@ -47,6 +49,9 @@ typedef struct window_s {
     sfEvent event;
     sfBool menu;
     sfBool music_bool;
+    sfBool exit_game_menu;
+    sfBool pause_menu;
+    sfBool end_of_game;
     sfMusic *music;
     char *background;
     char *colision;
